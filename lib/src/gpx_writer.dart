@@ -24,7 +24,7 @@ class GpxWriter {
     builder.element(GpxTagV11.gpx, nest: () {
       builder.attribute(GpxTagV11.version, gpx.version);
       builder.attribute(GpxTagV11.creator, gpx.creator);
-      builder.namespace('http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd', 'xsi:schemaLocation')
+      builder.namespace('http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd', 'xsi:schemaLocation');
       builder.namespace(uri);
       builder.attribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance', namespace: uri);
 
