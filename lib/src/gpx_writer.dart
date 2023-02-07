@@ -24,8 +24,8 @@ class GpxWriter {
     builder.element(GpxTagV11.gpx, nest: () {
       builder.attribute(GpxTagV11.version, gpx.version);
       builder.attribute(GpxTagV11.creator, gpx.creator);
-      builder.namespace(uri,'xmlns');
-      builder.attribute('xsi', 'http://www.w3.org/2001/XMLSchema-instance', namespace: uri);
+      builder.namespace(uri);
+      builder.attribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance', namespace: uri);
 
 
       if (gpx.metadata != null) {
