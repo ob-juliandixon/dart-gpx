@@ -21,9 +21,12 @@ class GpxWriter {
     final builder = XmlBuilder();
 
     builder.processing('xml', 'version="1.0" encoding="UTF-8"');
-    builder.element(GpxTagV11.gpx, namespaces: {'http://www.topografix.com/GPX/1/1':''}, nest: () {
+    builder.element(GpxTagV11.gpx, nest: () {
       builder.attribute(GpxTagV11.version, gpx.version);
       builder.attribute(GpxTagV11.creator, gpx.creator);
+      builder.element('schemaLocation', nest: () {
+        builder.namespace('http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd', 'xsi');
+      }, namespace: 'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd');
 
       if (gpx.metadata != null) {
         _writeMetadata(builder, gpx.metadata!);
