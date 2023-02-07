@@ -19,14 +19,13 @@ class GpxWriter {
 
   XmlNode _build(Gpx gpx) {
     final builder = XmlBuilder();
-
+    var uri = 'http://www.topografix.com/GPX/1/1';
     builder.processing('xml', 'version="1.0" encoding="UTF-8"');
     builder.element(GpxTagV11.gpx, nest: () {
       builder.attribute(GpxTagV11.version, gpx.version);
       builder.attribute(GpxTagV11.creator, gpx.creator);
-      builder.element('schemaLocation', nest: () {
-        builder.namespace('http://www.w3.org/2001/XMLSchema-instance', 'xsi');
-      }, namespace: 'http://www.topografix.com/GPX/1/1');
+      builder.namespace(uri);
+      builder.attribute('xsi', 'http://www.w3.org/2001/XMLSchema-instance', namespace: uri);
 
 
       if (gpx.metadata != null) {
