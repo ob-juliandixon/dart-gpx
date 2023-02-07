@@ -25,8 +25,9 @@ class GpxWriter {
       builder.attribute(GpxTagV11.version, gpx.version);
       builder.attribute(GpxTagV11.creator, gpx.creator);
       builder.element('schemaLocation', nest: () {
-        builder.namespace('http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd', 'xsi');
-      }, namespace: 'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd');
+        builder.namespace('http://www.w3.org/2001/XMLSchema-instance', 'xsi');
+      }, namespace: 'http://www.topografix.com/GPX/1/1');
+
 
       if (gpx.metadata != null) {
         _writeMetadata(builder, gpx.metadata!);
