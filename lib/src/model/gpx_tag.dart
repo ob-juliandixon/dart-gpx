@@ -13,6 +13,7 @@ class GpxTagV11 {
   static const latitude = 'lat';
   static const longitude = 'lon';
   static const elevation = 'ele';
+  static const speed = 'speed';
   static const time = 'time';
   static const name = 'name';
   static const desc = 'desc';

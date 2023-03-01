@@ -18,6 +18,9 @@ class Wpt {
   /// The elevation (in meters) of the point.
   double? ele;
 
+  /// Instantaneous speed at the point in (meters per second)
+  double? speed;
+
   /// The time that the point was recorded.
   DateTime? time;
 
@@ -86,6 +89,7 @@ class Wpt {
       {this.lat = 0.0,
       this.lon = 0.0,
       this.ele,
+      this.speed,
       this.time,
       this.magvar,
       this.geoidheight,
@@ -114,6 +118,7 @@ class Wpt {
       return other.lat == lat &&
           other.lon == lon &&
           other.ele == ele &&
+          other.speed == speed &&
           other.time == time &&
           other.magvar == magvar &&
           other.geoidheight == geoidheight &&
@@ -139,13 +144,14 @@ class Wpt {
 
   @override
   String toString() =>
-      "Wpt[${[lat, lon, ele, time, name, src, extensions].join(",")}]";
+      "Wpt[${[lat, lon, ele, speed, time, name, src, extensions].join(",")}]";
 
   @override
   int get hashCode => hashObjects([
         lat,
         lon,
         ele,
+        speed,
         time,
         magvar,
         geoidheight,

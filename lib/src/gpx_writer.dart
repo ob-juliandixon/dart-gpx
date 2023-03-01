@@ -24,10 +24,12 @@ class GpxWriter {
     builder.element(GpxTagV11.gpx, nest: () {
       builder.attribute(GpxTagV11.version, gpx.version);
       builder.attribute(GpxTagV11.creator, gpx.creator);
-      builder.attribute('xsi:schemaLocation', 'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd');
+      builder.attribute('xsi:schemaLocation',
+          'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd');
       builder.namespace(uri);
-      builder.attribute('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance', namespace: uri);
-
+      builder.attribute(
+          'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance',
+          namespace: uri);
 
       if (gpx.metadata != null) {
         _writeMetadata(builder, gpx.metadata!);
@@ -162,6 +164,7 @@ class GpxWriter {
         _writeElementWithTime(builder, GpxTagV11.time, wpt.time);
 
         _writeElement(builder, GpxTagV11.elevation, wpt.ele);
+        _writeElement(builder, GpxTagV11.speed, wpt.speed);
         _writeElement(
             builder,
             GpxTagV11.fix,
