@@ -18,6 +18,14 @@ class Gpx {
   /// to validate.
   String creator = '';
 
+  /// The schema locations that will be used to validate XML file
+  List<String> schemaLocations = [];
+
+  /// The namespace that will be used to validate XML file
+  String defaultNamespace = '';
+
+  Map<String, String> namespaceExtensions = {};
+
   /// Metadata about the file.
   Metadata? metadata;
 

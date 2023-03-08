@@ -1,6 +1,31 @@
 import 'package:gpx/gpx.dart';
 import 'package:test/test.dart';
 
+Gpx createRoadSenseGpx() {
+  final gpx = Gpx();
+  gpx.version = '1.1';
+  gpx.creator = 'dart-gpx library';
+  gpx.schemaLocations = [
+    'http://www.topografix.com/GPX/1/1',
+    'http://www.topografix.com/GPX/1/1/gpx.xsd',
+    'http://www.garmin.com/xmlschemas/GpxExtensions/v3',
+    'http://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd',
+    'http://www.garmin.com/xmlschemas/TrackPointExtension/v2',
+    'http://www.garmin.com/xmlschemas/TrackPointExtensionv2.xsd',
+    'http://www.garmin.com/xmlschemas/AccelerationExtension/v1',
+    'http://www.garmin.com/xmlschemas/AccelerationExtensionv1.xsd'
+  ];
+
+  gpx.defaultNamespace = 'http://www.topografix.com/GPX/1/1';
+  gpx.namespaceExtensions = {
+    'gpxtpx': 'http://www.garmin.com/xmlschemas/TrackPointExtension/v2',
+    'gpxx': 'http://www.garmin.com/xmlschemas/GpxExtensions/v3',
+    'gpxacc': 'http://www.garmin.com/xmlschemas/AccelerationExtension/v1'
+  };
+
+  return gpx;
+}
+
 Gpx createMinimalGPX() {
   final gpx = Gpx();
   gpx.version = '1.1';

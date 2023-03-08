@@ -76,4 +76,12 @@ void main() {
 
     expectXml(GpxWriter().asString(gpx, pretty: true), xml);
   });
+
+  test('write with RoadSense schema', () async {
+    final gpx = createRoadSenseGpx();
+
+    final xml = await File('test/assets/roadsense_xml.gpx').readAsString();
+
+    expectXml(GpxWriter().asString(gpx, pretty: true), xml);
+  });
 }

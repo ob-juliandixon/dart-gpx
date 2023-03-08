@@ -19,17 +19,20 @@ class GpxWriter {
 
   XmlNode _build(Gpx gpx) {
     final builder = XmlBuilder();
-    var uri = 'http://www.topografix.com/GPX/1/1';
+    const coreNamespaceUri = 'http://www.w3.org/2001/XMLSchema-instance';
     builder.processing('xml', 'version="1.0" encoding="UTF-8"');
     builder.element(GpxTagV11.gpx, nest: () {
       builder.attribute(GpxTagV11.version, gpx.version);
       builder.attribute(GpxTagV11.creator, gpx.creator);
-      builder.attribute('xsi:schemaLocation',
-          'http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd');
-      builder.namespace(uri);
-      builder.attribute(
-          'xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance',
-          namespace: uri);
+
+      // declares a standard namespace prefix (xsi) for a core namespace used in XSD: http://www.w3.org/2001/XMLSchema-instance
+      builder.namespace(coreNamespaceUri, 'xsi');
+      builder.attribute(GpxTagV11.schemaLocation, gpx.schemaLocations.join(' '),
+          namespace: coreNamespaceUri);
+
+      // Add default namespace
+      builder.namespace(gpx.defaultNamespace);
+      _writeNamespaceExtensions(builder, gpx.namespaceExtensions);
 
       if (gpx.metadata != null) {
         _writeMetadata(builder, gpx.metadata!);
@@ -49,6 +52,13 @@ class GpxWriter {
     });
 
     return builder.buildDocument();
+  }
+
+  void _writeNamespaceExtensions(
+      XmlBuilder builder, Map<String, String> namespaceExtensions) {
+    for (final ext in namespaceExtensions.entries) {
+      builder.namespace(ext.value, ext.key);
+    }
   }
 
   void _writeMetadata(XmlBuilder builder, Metadata metadata) {
