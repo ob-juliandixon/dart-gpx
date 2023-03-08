@@ -20,19 +20,20 @@ class GpxWriter {
   XmlNode _build(Gpx gpx) {
     final builder = XmlBuilder();
     const coreNamespaceUri = 'http://www.w3.org/2001/XMLSchema-instance';
-    builder.processing('xml', 'version="1.0" encoding="UTF-8"');
+
+    builder.declaration(version: '1.0', encoding: 'UTF-8');
     builder.element(GpxTagV11.gpx, nest: () {
       builder.attribute(GpxTagV11.version, gpx.version);
       builder.attribute(GpxTagV11.creator, gpx.creator);
+
+      // // Add default namespace
+      builder.namespace(gpx.defaultNamespace);
+      _writeNamespaceExtensions(builder, gpx.namespaceExtensions);
 
       // declares a standard namespace prefix (xsi) for a core namespace used in XSD: http://www.w3.org/2001/XMLSchema-instance
       builder.namespace(coreNamespaceUri, 'xsi');
       builder.attribute(GpxTagV11.schemaLocation, gpx.schemaLocations.join(' '),
           namespace: coreNamespaceUri);
-
-      // Add default namespace
-      builder.namespace(gpx.defaultNamespace);
-      _writeNamespaceExtensions(builder, gpx.namespaceExtensions);
 
       if (gpx.metadata != null) {
         _writeMetadata(builder, gpx.metadata!);

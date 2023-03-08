@@ -49,10 +49,14 @@ class Gpx {
       return other.creator == creator &&
           other.version == version &&
           other.metadata == metadata &&
+          other.defaultNamespace == defaultNamespace &&
           const ListEquality().equals(other.wpts, wpts) &&
           const ListEquality().equals(other.rtes, rtes) &&
+          const ListEquality().equals(other.schemaLocations, schemaLocations) &&
           const ListEquality().equals(other.trks, trks) &&
-          const MapEquality().equals(other.extensions, extensions);
+          const MapEquality().equals(other.extensions, extensions) &&
+          const MapEquality()
+              .equals(other.namespaceExtensions, namespaceExtensions);
     }
 
     return false;
@@ -66,7 +70,10 @@ class Gpx {
         wpts,
         rtes,
         trks,
-        extensions
+        extensions,
+        namespaceExtensions,
+        defaultNamespace,
+        schemaLocations,
       ].join(",")}]";
 
   @override
@@ -74,6 +81,10 @@ class Gpx {
         version,
         creator,
         metadata,
+        defaultNamespace,
+        schemaLocations,
+        ...namespaceExtensions.keys,
+        ...namespaceExtensions.values,
         ...extensions.keys,
         ...extensions.values,
         ...trks,

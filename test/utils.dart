@@ -23,6 +23,12 @@ Gpx createRoadSenseGpx() {
     'gpxacc': 'http://www.garmin.com/xmlschemas/AccelerationExtension/v1'
   };
 
+  // gpx.namespaceExtensions = {
+  //    'http://www.garmin.com/xmlschemas/TrackPointExtension/v2' : 'gpxtpx',
+  //   'http://www.garmin.com/xmlschemas/GpxExtensions/v3' :  'gpxx',
+  //   'http://www.garmin.com/xmlschemas/AccelerationExtension/v1' :  'gpxacc'
+  // };
+
   return gpx;
 }
 
