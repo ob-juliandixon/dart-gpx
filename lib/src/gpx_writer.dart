@@ -11,8 +11,8 @@ import 'model/wpt.dart';
 /// Convert Gpx into GPX
 class GpxWriter {
   /// Convert Gpx into GPX XML (v1.1) as String
-  String asString(Gpx gpx, {bool pretty = false}) =>
-      _build(gpx).toXmlString(pretty: pretty);
+  String asString(Gpx gpx, {bool pretty = false}) => _build(gpx)
+      .toXmlString(pretty: pretty, indentAttribute: (attribute) => true);
 
   /// Convert Gpx into GPX XML (v1.1) as XmlNode
   XmlNode asXml(Gpx gpx) => _build(gpx);
