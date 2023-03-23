@@ -42,6 +42,9 @@ class Gpx {
   /// here.
   Map<String, String> extensions = {};
 
+  /// Comment on top of the file to specify units of properties used in the gpx template
+  String? unitComment;
+
   @override
   // ignore: type_annotate_public_apis
   bool operator ==(other) {
@@ -49,6 +52,7 @@ class Gpx {
       return other.creator == creator &&
           other.version == version &&
           other.metadata == metadata &&
+          other.unitComment == unitComment &&
           other.defaultNamespace == defaultNamespace &&
           const ListEquality().equals(other.wpts, wpts) &&
           const ListEquality().equals(other.rtes, rtes) &&
@@ -74,6 +78,7 @@ class Gpx {
         namespaceExtensions,
         defaultNamespace,
         schemaLocations,
+        unitComment,
       ].join(",")}]";
 
   @override
@@ -81,6 +86,7 @@ class Gpx {
         version,
         creator,
         metadata,
+        unitComment,
         defaultNamespace,
         schemaLocations,
         ...namespaceExtensions.keys,

@@ -20,7 +20,9 @@ class GpxWriter {
   XmlNode _build(Gpx gpx) {
     final builder = XmlBuilder();
     const coreNamespaceUri = 'http://www.w3.org/2001/XMLSchema-instance';
-
+    if (gpx.unitComment != null) {
+      builder.comment(gpx.unitComment!);
+    }
     builder.declaration(version: '1.0', encoding: 'UTF-8');
     builder.element(GpxTagV11.gpx, nest: () {
       builder.attribute(GpxTagV11.version, gpx.version);
